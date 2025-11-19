@@ -1,0 +1,389 @@
+/* ================================
+   GLOBAL RESET + BASE
+================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    background: #f3f7ff;
+    color: #0f1b2d;
+}
+
+/* ================================
+   TOPBAR
+================================ */
+.topbar {
+    background: #0b74ff;
+    padding: 16px 24px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 10px #00000020;
+}
+
+.topbar h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.tag {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+.profile-brief {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+}
+
+/* ================================
+   WIZARD NAVIGATION (Steps)
+================================ */
+.wizard {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.step {
+    flex: 1;
+    padding: 10px;
+    background: #d7e7ff;
+    border: none;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 0.95rem;
+}
+
+.step:hover {
+    background: #c4dbff;
+}
+
+.step.active {
+    background: #0b74ff;
+    color: white;
+}
+
+/* ================================
+   MAIN CONTENT AREA
+================================ */
+.main {
+    padding: 20px;
+}
+
+.content {
+    margin-top: 15px;
+}
+
+/* ================================
+   PANEL / CARD
+================================ */
+.panel {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px #0000001a;
+    animation: fade 0.25s ease;
+}
+
+@keyframes fade {
+    from { opacity: 0; transform: translateY(5px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.panel h2 {
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+    color: #0b3d91;
+}
+
+.muted {
+    font-size: 0.9rem;
+    color: #475569;
+    margin-bottom: 14px;
+}
+
+/* ================================
+   FORMS
+================================ */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 14px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    gap: 4px;
+}
+
+input, select {
+    padding: 10px 12px;
+    border: 1px solid #d0d7e2;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.2s;
+}
+
+input:focus, select:focus {
+    border-color: #0b74ff;
+    box-shadow: 0 0 0 2px #0b74ff30;
+}
+
+/* ================================
+   BUTTONS
+================================ */
+.btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background: #0b74ff;
+    color: white;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: #095fcc;
+}
+
+.btn.ghost {
+    background: transparent;
+    border: 1px solid #0b74ff;
+    color: #0b74ff;
+}
+
+.btn.ghost:hover {
+    background: #e7f1ff;
+}
+
+.btn.small {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+.btn.secondary {
+    background: #334155;
+}
+
+/* ================================
+   INLINE FORM ROW
+================================ */
+.inline {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+/* ================================
+   LIST / CHIPS
+================================ */
+.chip-list,
+.list {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.chip-list li {
+    display: inline-block;
+    background: #eaf2ff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin: 4px;
+    border-left: 4px solid #0b74ff;
+    font-size: 0.92rem;
+}
+
+.list li {
+    background: #eef5ff;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border-left: 5px solid #0b74ff;
+    font-size: 0.95rem;
+}
+
+/* ================================
+   TABLES
+================================ */
+.table-wrap {
+    overflow-x: auto;
+    margin-top: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #dceaff;
+    padding: 12px;
+    text-align: left;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #e1e5ee;
+}
+
+input[type="radio"] {
+    width: 20px;
+    height: 20px;
+}
+
+/* ================================
+   TOOLBAR UNDER TABLE
+================================ */
+.toolbar {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+}
+
+/* ================================
+   ACTIONS ROW
+================================ */
+.actions-row {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ================================
+   TOAST NOTIFICATION
+================================ */
+.toast {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    background: #0b74ff;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.3s ease;
+    pointer-events: none;
+    box-shadow: 0 4px 12px #00000030;
+    font-weight: 500;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ================================
+   RESPONSIVE OPTIMIZATION
+================================ */
+
+/* Phones */
+@media (max-width: 600px) {
+    .topbar h1 {
+        font-size: 1.25rem;
+    }
+    .wizard {
+        flex-direction: column;
+    }
+    .step {
+        font-size: 1rem;
+    }
+    .actions-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .btn {
+        width: 100%;
+    }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+    .inline {
+        flex-direction: column;
+    }
+    .btn {
+        width: 100%;
+    }
+}
+/* MODAL */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #00000060;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 420px;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px #00000030;
+    animation: fadeIn 0.3s;
+}
+
+.modal-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+#absentList {
+    margin: 15px 0;
+    list-style: none;
+}
+
+#absentList li {
+    padding: 10px;
+    background: #eef5ff;
+    border-left: 5px solid #0b74ff;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.absent-btn {
+    margin-top: 6px;
+    display: inline-block;
+    padding: 6px 10px;
+    background: #0b74ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}

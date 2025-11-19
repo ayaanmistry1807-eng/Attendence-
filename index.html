@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smart Attendance — Teacher Workspace</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>Smart Attendance</h1>
+      <p class="tag">Teacher workspace — simple · private · professional</p>
+    </div>
+
+    <div class="profile-brief" id="profileBrief">
+      <!-- Filled by JS after profile saved -->
+      <span id="briefName"></span>
+      <button class="btn ghost small" id="editProfileBtn">Edit Profile</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <nav class="wizard">
+      <button class="step active" data-step="profile">1 • Profile</button>
+      <button class="step" data-step="classes">2 • Classes</button>
+      <button class="step" data-step="students">3 • Students</button>
+      <button class="step" data-step="attendance">4 • Attendance</button>
+    </nav>
+
+    <section class="content">
+
+      <!-- PROFILE -->
+      <section class="panel" id="profileScreen">
+        <h2>Teacher Profile</h2>
+        <p class="muted">Fill this once. You can edit it anytime.</p>
+
+        <div class="form-grid">
+          <label>
+            Full name
+            <input id="tName" placeholder="e.g. Ayaan Mistry" />
+          </label>
+
+          <label>
+            Email
+            <input id="tEmail" placeholder="you@college.edu" />
+          </label>
+
+          <label>
+            Phone (WhatsApp sender)
+            <input id="tPhone" placeholder="91XXXXXXXXXX — used to open WhatsApp link" />
+          </label>
+
+          <label>
+            Subject
+            <input id="tSubject" placeholder="e.g. Engineering Graphics" />
+          </label>
+        </div>
+
+        <div class="actions-row">
+          <button class="btn primary" id="saveProfileBtn">Save & Continue</button>
+        </div>
+      </section>
+
+      <!-- CLASSES -->
+      <section class="panel hidden" id="classesScreen">
+        <h2>Classes You Teach</h2>
+        <p class="muted">Add classes (FE-A, SE-B, TE-C ...). You can add many.</p>
+
+        <div class="inline">
+          <input id="classInput" placeholder="Enter class code — e.g. FE-A" />
+          <button class="btn" id="addClassBtn">Add Class</button>
+        </div>
+
+        <ul id="classList" class="chip-list"></ul>
+
+        <div class="actions-row">
+          <button class="btn ghost" id="backToProfileFromClass">Back</button>
+          <button class="btn primary" id="toStudentsBtn">Next: Students</button>
+        </div>
+      </section>
+
+      <!-- STUDENTS -->
+      <section class="panel hidden" id="studentsScreen">
+        <h2>Students Manager</h2>
+        <p class="muted">Select a class, then add students with parent WhatsApp number.</p>
+
+        <div class="form-grid">
+          <label>
+            Select class
+            <select id="studentsClassSelect"></select>
+          </label>
+
+          <label>
+            Student name
+            <input id="studentName" placeholder="Full name" />
+          </label>
+
+          <label>
+            Parent WhatsApp (country code + number)
+            <input id="parentNumber" placeholder="91XXXXXXXXXX" />
+          </label>
+        </div>
+
+        <div class="inline">
+          <button class="btn" id="addStudentBtn">Add Student</button>
+          <button class="btn secondary" id="generate65Btn">Auto-generate 65 (demo)</button>
+        </div>
+
+        <h4>Students in selected class</h4>
+        <ul id="studentList" class="list"></ul>
+
+        <div class="actions-row">
+          <button class="btn ghost" id="backToClassesBtn">Back</button>
+          <button class="btn primary" id="toAttendanceBtn">Next: Attendance</button>
+        </div>
+      </section>
+
+      <!-- ATTENDANCE -->
+      <section class="panel hidden" id="attendanceScreen">
+        <h2>Mark Attendance</h2>
+        <p class="muted">Select class & date. Mark Present / Absent. Submit to store & send WhatsApp for absentees.</p>
+
+        <div class="form-grid">
+          <label>
+            Select class
+            <select id="attClassSelect"></select>
+          </label>
+
+          <label>
+            Date
+            <input id="attDate" type="date" />
+          </label>
+        </div>
+
+        <div class="table-wrap">
+          <table id="attendanceTable">
+            <thead>
+              <tr><th>#</th><th>Student</th><th>Present</th><th>Absent</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="toolbar">
+          <button class="btn small" id="markAllPresent">All Present</button>
+          <button class="btn small ghost" id="markAllAbsent">All Absent</button>
+          <button class="btn" id="submitAttendanceBtn">Submit Attendance</button>
+          <button class="btn" id="downloadReportBtn">Download CSV</button>
+        </div>
+
+        <div class="actions-row">
+          <button class="btn ghost" id="backToStudentsBtn">Back</button>
+          <button class="btn ghost" id="editProfileFromAttendance">Edit Profile</button>
+        </div>
+      </section>
+
+    </section>
+  </main>
+
+  <div id="toast" class="toast">Saved</div>
+
+  <script src="script.js"></script>
+  <!-- ABSENT STUDENTS MODAL -->
+<div id="absentModal" class="modal hidden">
+  <div class="modal-content">
+    <h3>Absent Students Today</h3>
+    <p class="muted">Tap send to notify parents on WhatsApp</p>
+
+    <ul id="absentList"></ul>
+
+    <button class="btn ghost" id="closeAbsentModal">Close</button>
+  </div>
+</div>
+
+</body>
+</html>
