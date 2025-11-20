@@ -412,28 +412,33 @@ document.getElementById("closeAbsentModal").addEventListener("click", ()=>{
   document.getElementById("absentModal").classList.add("hidden");
 });
 
-/* download CSV (full history) */
-document.getElementById("downloadReportBtn").addEventListener("click", ()=>{
-  // CSV header
-  let csv = "Class,Date,Student,Status,ParentNumber\n";
-  for (const cls of Object.keys(attendance)){
-    for (const dt of Object.keys(attendance[cls])){
-      const arr = attendance[cls][dt];
-      arr.forEach(rec => {
-        // escape quotes in names
-        const safeName = (rec.name || "").replace(/"/g, '""');
-        csv += `${cls},${dt},"${safeName}",${rec.status},${rec.parent}\n`;
-      });
-    }
-  }
-  if (csv === "Class,Date,Student,Status,ParentNumber\n") {
-    showToast("No attendance data to download");
+document.getElementById("downloadReportBtn").addEventListener("click", () => {
+  const cls = document.getElementById("attClassSelect").value;
+
+  if (!cls) {
+    showToast("Select a class first");
     return;
   }
+
+  const classAttendance = attendance[cls];
+  if (!classAttendance || Object.keys(classAttendance).length === 0) {
+    showToast("No attendance recorded for this class");
+    return;
+  }
+
+  let csv = "Class,Date,Student,Status,Parent\n";
+
+  for (const dt of Object.keys(classAttendance)) {
+    classAttendance[dt].forEach(rec => {
+      const safeName = (rec.name || "").replace(/"/g, '""');
+      csv += `${cls},${dt},"${safeName}",${rec.status},${rec.parent}\n`;
+    });
+  }
+
   const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = `attendance_report_${new Date().toISOString().split("T")[0]}.csv`;
+  link.download = `${cls}_attendance_${new Date().toISOString().split("T")[0]}.csv`;
   link.click();
 });
 
@@ -498,4 +503,6 @@ function refreshAllUI(){
     profileBrief.style.display = "flex";
   }
 }
+
+
 
